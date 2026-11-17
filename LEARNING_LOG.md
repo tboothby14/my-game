@@ -2,20 +2,7 @@
 
 ## About me
 
-Self-ratings from the interview (1 = never, 5 = regularly):
-
-| Area | Rating |
-|---|---|
-| Terminal / command line | 3 |
-| Writing code | 3 |
-| Git / GitHub | 3 |
-| AI tools | 4 |
-| Product / business (requirements, projects, customers) | 5 |
-
-- On a Mac.
-- Strong product instincts: cut scope quickly and reasoned about tradeoffs well.
-- Code reading is the area to keep building: predictions were good on logic (loops, dice state), shakier on reading syntax cold.
-- Prefers to keep moving; often skipped explain-backs when short on time.
+Self-ratings (1–5): terminal 3, code 3, git 3, AI tools 4, product/business 5. Mac.
 
 ---
 
