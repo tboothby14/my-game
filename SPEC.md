@@ -15,3 +15,4 @@ A two-player backgammon game for one screen, in a single `index.html` file that 
 - Forced-move rules (must use both dice if possible): players police this themselves
 - Doubling cube
 - Computer opponent
+- Online multiplayer (would need a server to referee moves)
