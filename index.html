@@ -270,7 +270,7 @@ function render() {
   if (g.rolled && !g.winner && !anyLegalMove()) msg = 'No legal moves - click Pass.';
   $('message').textContent = msg;
   $('rollBtn').disabled = g.rolled || !!g.winner;
-  $('passBtn').disabled = !g.rolled || !!g.winner;
+  $('passBtn').disabled = !g.rolled || !!g.winner || anyLegalMove();   // Pass only when stuck
 
   // Dice: dice already used are greyed out.
   const left = g.movesLeft.slice();
@@ -360,7 +360,7 @@ function render() {
 
 // ===== BUTTONS =====
 $('rollBtn').onclick = roll;
-$('passBtn').onclick = () => { if (game.rolled && !game.winner) endTurn(); };
+$('passBtn').onclick = () => { if (game.rolled && !game.winner && !anyLegalMove()) endTurn(); };
 $('newBtn').onclick = newGame;
 $('winNewBtn').onclick = newGame;
 
