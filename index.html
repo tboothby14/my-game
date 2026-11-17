@@ -72,13 +72,13 @@
 const CONFIG = {
   pointWidth: 52,        // width of each triangle, in pixels
   halfHeight: 220,       // height of the top (or bottom) half of the board
-  checkerSize: 40,       // diameter of a checker
+  checkerSize: 50,       // diameter of a checker
   barWidth: 56,
   offWidth: 70,
   maxStack: 5,           // checkers drawn per point before showing a number instead
   colors: {
     board: '#1f6b3a', barColor: '#4a2c0f', triangleA: '#c9a063', triangleB: '#8b3a2b',
-    white: '#f4f0e6', black: '#222', target: '#4fc3f7', select: '#ffeb3b'
+    white: '#f4f0e6', black: '#1e5bd8', target: '#4fc3f7', select: '#ffeb3b'
   }
 };
 
@@ -111,6 +111,7 @@ function newGame() {
 // ===== RULE HELPERS =====
 const sign = p => (p === 'white' ? 1 : -1);
 const other = p => (p === 'white' ? 'black' : 'white');
+const displayName = p => (p === 'white' ? 'White' : 'Blue');               // what players see
 const mineAt = (p, i) => game.points[i] * sign(p) > 0;                       // does p own checkers on point i?
 const oppCountAt = (p, i) => (game.points[i] * sign(p) < 0 ? Math.abs(game.points[i]) : 0);
 
@@ -194,7 +195,7 @@ function doMove(from, move) {
     if (oppCountAt(p, move.to) === 1) {            // a lone opponent checker is hit and sent to the bar
       game.points[move.to] = 0;
       game.bar[other(p)]++;
-      game.message = other(p) + ' was hit and sent to the bar!';
+      game.message = displayName(other(p)) + ' was hit and sent to the bar!';
     }
     game.points[move.to] += s;
   }
@@ -262,9 +263,9 @@ function render() {
   const targets = g.selected === null ? [] : legalMoves(g.selected).map(m => m.to);
 
   // Status line, message, buttons.
-  const name = p === 'white' ? 'White' : 'Black';
+  const name = displayName(p);
   $('status').textContent = name + "'s turn" + (g.rolled ? '' : ' - click Roll') +
-    '   |   Borne off: White ' + g.off.white + ', Black ' + g.off.black;
+    '   |   Borne off: White ' + g.off.white + ', Blue ' + g.off.black;
   let msg = g.message;
   if (g.rolled && !g.winner && !anyLegalMove()) msg = 'No legal moves - click Pass.';
   $('message').textContent = msg;
@@ -354,7 +355,7 @@ function render() {
 
   // Winner overlay.
   $('winner').style.display = g.winner ? 'flex' : 'none';
-  if (g.winner) $('winnerText').textContent = 'You win, ' + (g.winner === 'white' ? 'White' : 'Black') + '!';
+  if (g.winner) $('winnerText').textContent = 'You win, ' + displayName(g.winner) + '!';
 }
 
 // ===== BUTTONS =====
